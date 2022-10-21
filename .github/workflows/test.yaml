@@ -18,6 +18,7 @@ jobs:
     - name: Install dependencies
       run: |
         python setup.py install
+        pip install pytest
         pip install pylint
 
     - name: Analysing the code with pylint
