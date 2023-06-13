@@ -25,7 +25,7 @@ jobs:
       - name: Create GitHub Token
         id: create_token
         run: |
-          python create_token.py ${{ secrets.TIKODUDE_USERNAME }} ${{ secrets.TIKODUDE_PASSWORD }}
+          python create_token.py "${{ secrets.TIKODUDE_USERNAME }}" "${{ secrets.TIKODUDE_PASSWORD }}"
           echo "::set-output name=github_token::$(cat token.txt)"
 
       - name: Delete token.txt
