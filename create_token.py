@@ -10,10 +10,10 @@ def create_github_token(username, password):
     response = requests.post(url, auth=(username, password), headers=headers, json=data)
     if response.status_code == 201:
         token = response.json().get('token')
-        print(f'GitHub Token created: {token}')
+        print('GitHub Token created:', token)
         return token
     else:
-        print(f'Failed to create GitHub Token: {response.json().get("message")}')
+        print('Failed to create GitHub Token:', response.json().get('message'))
 
 if __name__ == '__main__':
     import sys
