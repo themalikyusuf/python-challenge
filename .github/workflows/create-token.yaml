@@ -1,0 +1,32 @@
+name: Create GitHub Token and Update Secret in Vault
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  create_token_and_update_secret:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests hvac
+
+      - name: Create GitHub Token
+        id: create_token
+        run: |
+          python create_token.py ${{ secrets.TIKODUDE_USERNAME }} ${{ secrets.TIKODUDE_PASSWORD }}
+          echo "::set-output name=github_token::$(cat token.txt)"
+
+      - name: Delete token.txt
+        run: cat token.txt
